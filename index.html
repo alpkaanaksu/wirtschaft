@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="term"></p>
+    <script>
+        const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+        function generatePseudoscientificWirtschaftTerm(length, words, end) {
+            let term = "";
+            let used = new Set();
+
+            for (let i = 0; i < length - 1; i++) {
+                let word = getRandomItem(words);
+                while (used.has(word)) {
+                    word = getRandomItem(words);
+                }
+
+                used.add(word);
+                term += word + " ";
+            }
+
+            term += getRandomItem(end);
+
+            return term;
+        }
+
+        const economicPsychologyTerms = [
+            "behavioral",
+            "bias",
+            "biased",
+            "motivation",
+            "motivational",
+            "satisfaction",
+            "leadership",
+            "organization",
+            "organizational",
+            "performance",
+            "engagement",
+            "consumer",
+            "dynamics",
+            "conflict",
+            "balance",
+            "stress",
+            "career",
+            "training",
+            "personality",
+            "emotional",
+            "emotion",
+            "influence",
+            "negotiation"
+        ];
+
+        const economicPsychologyTermsEnding = [
+            "motivation",
+            "bias",
+            "satisfaction",
+            "leadership",
+            "organization",
+            "performance",
+            "engagement",
+            "consumer",
+            "dynamics",
+            "conflict",
+            "balance",
+            "stress",
+            "career",
+            "training",
+            "personality",
+            "emotion",
+            "influence",
+            "negotiation",
+            "theory"
+        ];
+
+
+        const term = generatePseudoscientificWirtschaftTerm(3, economicPsychologyTerms, economicPsychologyTermsEnding);
+
+        
+        document.querySelector("#term").textContent = term;
+        
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-top: 20vh;
+        }
+
+        #term {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</body>
+
+</html>
