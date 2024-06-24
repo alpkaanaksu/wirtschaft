@@ -4,29 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Wirtschaft</title>
 </head>
 
 <body>
     <p id="term"></p>
+    <button onclick="displayNewWord()">new concept</button>
     <script>
         const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
         function generatePseudoscientificWirtschaftTerm(length, words, end) {
             let term = "";
-            let used = new Set();
+            let used = [];
 
             for (let i = 0; i < length - 1; i++) {
                 let word = getRandomItem(words);
-                while (used.has(word)) {
+
+                while (used.includes(word)) {
                     word = getRandomItem(words);
                 }
 
-                used.add(word);
+                used.push(word);
                 term += word + " ";
             }
 
-            term += getRandomItem(end);
+            let endword = getRandomItem(end);
+
+            while (used.includes(endword)) {
+                endword = getRandomItem(end);
+            }
+
+            term += endword;
 
             return term;
         }
@@ -80,11 +88,12 @@
         ];
 
 
-        const term = generatePseudoscientificWirtschaftTerm(3, economicPsychologyTerms, economicPsychologyTermsEnding);
+        function displayNewWord() {
+            const term = generatePseudoscientificWirtschaftTerm(3, economicPsychologyTerms, economicPsychologyTermsEnding);
+            document.querySelector("#term").textContent = term;
+        }
 
-        
-        document.querySelector("#term").textContent = term;
-        
+        displayNewWord();
     </script>
 
     <style>
@@ -96,9 +105,25 @@
         }
 
         #term {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             text-align: center;
+        }
+
+        button {
+            font-size: 1.5rem;
+            padding: 0.5rem 2rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            border-radius: 99px;
+            border: none;
+            background-color: #00883A;
+            font-weight: bold;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #005F26;
         }
     </style>
 </body>
